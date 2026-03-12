@@ -71,14 +71,14 @@ int main(void){
                         if (bot.y <= 0)   bot.y        = 0;
 
                         //Ball collision
-                        if (BALLX - 15 <= 0||  BALLX - 785 >= 0) ball_speedX = -ball_speedX;
-                        if (BALLY - 15 <= 0 || BALLY - 585 >= 0) ball_speedY = -ball_speedY;
+                        if (BALLX - 20 <= 0||  BALLX - 780 >= 0) ball_speedX = -ball_speedX;
+                        if (BALLY - 20 <= 0 || BALLY - 580 >= 0) ball_speedY = -ball_speedY;
 
                         //Point check
-                        if (BALLX - 15 == 0){
+                        if (BALLX - 20 == 0){
                                 BOT_POINT++;
                         }
-                        if (BALLX - 785 == 0){
+                        if (BALLX - 780 == 0){
                                 PLAYER_POINT++;
                         }
 
@@ -123,7 +123,7 @@ int main(void){
                 ClearBackground(BLACK);
 
                 //Drawing ball
-                DrawCircle(BALLX,BALLY,15,WHITE);
+                DrawCircle(BALLX,BALLY,20,20,WHITE);
 
                 //Drawing points
                 DrawText(TextFormat("%.2d",PLAYER_POINT),235,10,100,WHITE);
