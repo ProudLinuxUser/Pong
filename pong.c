@@ -29,15 +29,16 @@ int main(void){
         int PLAYER_POINT = 0;
         int BOT_POINT    = 0;
         float SPEED        = 5;
-        float BOT_SPEED    = 4.5;
+        float BOT_SPEED    = 5;
 
         //Player && Bot rect
         int Px = 60;
         int Py = 40;
         int Bx = 730;
         int By = 40;
-        bool game_on = false;
+        bool game_on = true;
         bool restart = false;
+        bool run = true;
         Rectangle player = {Px,Py,15,100};
         Rectangle bot    = {Bx,By,15,100};
 
@@ -49,9 +50,22 @@ int main(void){
         while (!WindowShouldClose()){
 
                 if (restart){
-                        game_on = false;
+                        run = true;
                         PLAYER_POINT = 0;
                         BOT_POINT = 0;
+                }
+
+                if (run){
+                        if (GuiButton((Rectangle){250,325,300,100},"Endless")){
+                                        BOT_SPEED = 5;
+                                        game_on = false;
+                                        run = false;
+                        }
+                        if (GuiButton((Rectangle){250,425,300,100},"Beatable")){
+                                        BOT_SPEED = 4;
+                                        game_on = false;
+                                        run = false;
+                        }
                 }
 
                 if (!game_on){
@@ -106,14 +120,17 @@ int main(void){
                 }
 
                 //Drawing a bit of style
-                for (int y = 0 ; y != 600 ; y += 25){
-                           DrawCircle(397,y,3,WHITE);
+                if (!run){
+                        for (int y = 0 ; y != 600 ; y += 25){
+                                   DrawRectangle(397,y,3,3,WHITE);
+                        }
                 }
 
                 //Reset && quit options
                 if (PLAYER_POINT == 15){
                         DrawText("Player won!",250,270,50,WHITE);
                         game_on = true;
+                        run = true;
                         if (GuiButton((Rectangle){250,325,300,100},"Restart")){
                                 restart = true;
                         }
@@ -124,6 +141,7 @@ int main(void){
                 }else if (BOT_POINT == 15){
                         DrawText("Bot won!",300,250,50,WHITE);
                         game_on = true;
+                        run = true;
                         if (GuiButton((Rectangle){250,325,300,100},"Restart")){
                                 restart = true;
                         }
@@ -137,7 +155,9 @@ int main(void){
                 ClearBackground(BLACK);
 
                 //Drawing ball
-                DrawRectangle(BALLX,BALLY,20,20,WHITE);
+                if (!run){
+                        DrawRectangle(BALLX,BALLY,20,20,WHITE);
+                }
 
                 //Drawing points
                 DrawText(TextFormat("%.2d",PLAYER_POINT),235,10,100,WHITE);
