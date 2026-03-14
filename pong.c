@@ -56,7 +56,7 @@ int main(void){
                 }
 
                 if (run){
-                        if (GuiButton((Rectangle){250,325,300,100},"Endless")){
+                        if (GuiButton((Rectangle){250,325,300,100},"Unbeatable")){
                                         BOT_SPEED = 5;
                                         game_on = false;
                                         run = false;
